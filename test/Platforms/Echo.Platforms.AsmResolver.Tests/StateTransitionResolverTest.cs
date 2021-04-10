@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AsmResolver.DotNet;
 using AsmResolver.PE.DotNet.Cil;
@@ -99,5 +100,6 @@ namespace Echo.Platforms.AsmResolver.Tests
             Assert.Equal(2, dfg.Nodes[body.Instructions[6].Offset].VariableDependencies.First().Count);
             Assert.Equal(2, dfg.Nodes[body.Instructions[7].Offset].VariableDependencies.First().Count);
         }
+
     }
 }

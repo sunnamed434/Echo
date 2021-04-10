@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Echo.Core.Graphing.Analysis;
 using Echo.Core.Graphing.Analysis.Sorting;
@@ -68,6 +69,6 @@ namespace Echo.DataFlow.Analysis
                 return result;
             }
         }
-        
+
     }
 }
