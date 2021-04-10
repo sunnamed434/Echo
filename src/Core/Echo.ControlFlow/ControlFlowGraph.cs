@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Echo.ControlFlow.Collections;
 using Echo.ControlFlow.Regions;
+using Echo.ControlFlow.Serialization.Dot;
 using Echo.Core.Code;
 using Echo.Core.Graphing;
+using Echo.Core.Graphing.Serialization.Dot;
 
 namespace Echo.ControlFlow
 {
@@ -108,5 +111,21 @@ namespace Echo.ControlFlow
         /// <inheritdoc />
         IEnumerable<ControlFlowNode<TInstruction>> IControlFlowRegion<TInstruction>.GetSuccessors() =>
             Enumerable.Empty<ControlFlowNode<TInstruction>>();
+
+        /// <summary>
+        /// Serializes the control flow graph to the provided output stream, in graphviz dot format.
+        /// </summary>
+        /// <param name="writer">The output stream.</param>
+        /// <remarks>To customize the layout of the final graph, use the <see cref="DotWriter"/> class.</remarks>
+        public void ToDotGraph(TextWriter writer)
+        {
+            var dotWriter = new DotWriter(writer)
+            {
+                NodeAdorner = new ControlFlowNodeAdorner<TInstruction>(),
+                EdgeAdorner = new ControlFlowEdgeAdorner<TInstruction>(),
+                SubGraphAdorner = new ExceptionHandlerAdorner<TInstruction>(),
+            };
+            dotWriter.Write(this);
+        }
     }
 }

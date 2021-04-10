@@ -30,14 +30,5 @@ namespace Mocks
                 Console.WriteLine(ex.Message);
             }
         }
-
-        public static void Test()
-        {
-            int x = int.Parse(Console.ReadLine()) + 345;
-            if (x < 0)
-                x = int.Parse(Console.ReadLine()) + 123;
-
-            Console.WriteLine(x);
-        }
     }
 }
